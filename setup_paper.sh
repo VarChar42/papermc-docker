@@ -22,10 +22,10 @@ if [ ! -e ${JAR_NAME} ]; then
     echo eula=true > eula.txt
 fi
 
-if [ -d "${PLUGINS_FOLDER}" ]; then
+if [ -d "${PLUGINS_FOLDER}" ]; then  # If the plugins folder/mount exists create symlinks for each jar file/plugin
 
     if [ -d "plugins" ]; then
-        rm -f plugins/*.jar
+        rm -f plugins/*.jar  # Remove old symlinks
     else
         mkdir plugins
     fi
@@ -36,15 +36,13 @@ if [ -d "${PLUGINS_FOLDER}" ]; then
         echo "  * $file"
         ln -s $file plugins
     done
-    
 fi
-
 
 if [ ! -z "${JVM_RAM}" ]; then
     JVM_ARGS="-Xmx${JVM_RAM} ${JVM_ARGS}"
 fi
 
-if [ "${DEBUG}" == "true" ]; then
+if [ "${DEBUG}" == "true" ]; then  # Can be used to debug in combination with -it
     exec /bin/sh
 else
     exec java ${JVM_ARGS} -jar ${JAR_NAME} nogui

@@ -7,7 +7,6 @@ ENV MC_VERSION="latest" \
 
 COPY setup_paper.sh .
 
-
 RUN apk update && apk add curl jq \
     && mkdir mc_root
 
