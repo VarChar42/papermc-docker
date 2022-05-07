@@ -22,10 +22,10 @@ if [ ! -e ${JAR_NAME} ]; then
     echo eula=true > eula.txt
 fi
 
-if [ -d "${PLUGINS_FOLDER}" ]; then  # If the plugins folder/mount exists create symlinks for each jar file/plugin
+if [ -d "${PLUGINS_FOLDER}" ]; then  # If the plugins folder/mount exists, copy over all plugins
 
     if [ -d "plugins" ]; then
-        rm -f plugins/*.jar  # Remove old symlinks
+        rm -f plugins/*.jar  # Remove existing plugins
     else
         mkdir plugins
     fi
@@ -34,7 +34,7 @@ if [ -d "${PLUGINS_FOLDER}" ]; then  # If the plugins folder/mount exists create
 
     for file in ${PLUGINS_FOLDER}/*.jar; do
         echo "  * $file"
-        ln -s $file plugins
+        cp "$file" plugins
     done
 fi
 

@@ -1,7 +1,0 @@
-services:
-  mc:
-    build: .
-    ports:
-      - "25565:25565"
-    volumes:
-      - "./mc:/mc_root"
